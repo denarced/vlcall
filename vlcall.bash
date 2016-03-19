@@ -10,8 +10,8 @@
 # Create playlist to tmp
 playlist=`mktemp --suffix=.m3u`
 # Playlist was created to /tmp because otherwise `find` would find it and add it
-# to playlist.
-find . -type f | sort > $playlist
+# to playlist. Also Chrome downloads are ignored.
+find . -type f ! -name '*.crdownload' | sort > $playlist
 
 # Move playlist to CWD because otherwise the relative file paths wouldn't be
 # valid.
