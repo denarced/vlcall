@@ -11,7 +11,17 @@
 playlist=`mktemp --suffix=.m3u`
 # Playlist was created to /tmp because otherwise `find` would find it and add it
 # to playlist. Also Chrome downloads are ignored.
-find . -type f ! -name '*.crdownload' | sort > $playlist
+find . -type f ! -name '*.crdownload' > $playlist
+
+# Randomize playlist if requested
+# The parentheses are not strictly speaking necessary
+if [ $# -gt 0 ] && ( [ "$1" == "-r" ] || [ "$1" == "--random" ] )
+then
+    randParam=-R
+else
+    randParam=""
+fi
+sort $randParam -o $playlist $playlist
 
 # Move playlist to CWD because otherwise the relative file paths wouldn't be
 # valid.
