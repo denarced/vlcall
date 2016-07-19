@@ -10,8 +10,8 @@
 # Create playlist to tmp
 playlist=`mktemp --suffix=.m3u`
 # Playlist was created to /tmp because otherwise `find` would find it and add it
-# to playlist. Also Chrome downloads are ignored.
-find . -type f ! -name '*.crdownload' > $playlist
+# to playlist. Also Chrome downloads and m3u playlists are ignored.
+find . -type f ! -name '*.crdownload' ! -name '*.m3u' > $playlist
 
 # Randomize playlist if requested
 # The parentheses are not strictly speaking necessary
